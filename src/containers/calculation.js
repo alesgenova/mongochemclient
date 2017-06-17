@@ -49,47 +49,50 @@ class CalculationContainer extends Component {
   }
 
   componentWillMount() {
-    const params = new URLSearchParams(this.props.location.search);
-    let iso = params.get('iso');
-    iso = parseFloat(iso);
-    if (iso) {
-      this.setState({
-        isoSurfaces: [{
-          value: iso,
-          color: 'blue',
-          opacity: 0.9,
-        }, {
-          value: -iso,
-          color: 'red',
-          opacity: 0.9
-        }
-        ]
-      });
-    }
+    if (this.props.match) {
+      const params = new URLSearchParams(this.props.location.search);
+      let iso = params.get('iso');
+      iso = parseFloat(iso);
+      if (iso) {
+        this.setState({
+          isoSurfaces: [{
+            value: iso,
+            color: 'blue',
+            opacity: 0.9,
+          }, {
+            value: -iso,
+            color: 'red',
+            opacity: 0.9
+          }
+          ]
+        });
+      }
 
-    let orbital = params.get('mo');
-    orbital = parseInt(orbital);
-    if (orbital) {
-      this.setState({
-        orbital,
-      })
-    }
+      let orbital = params.get('mo');
+      orbital = parseInt(orbital);
+      if (orbital) {
+        this.setState({
+          orbital,
+        })
+      }
 
-    if (this.props.match.params.id) {
-      const id = this.props.match.params.id;
-      this.setState({
-        id,
-      })
+      if (this.props.match.params.id) {
+        const id = this.props.match.params.id;
+        this.setState({
+          id,
+        })
+      }
     }
   }
 
   componentDidMount() {
-    if (this.state.id != null) {
+    if (this.state.id && !this.props.cjson) {
       this.props.dispatch(loadCalculationById(this.state.id));
 
-      if (this.state.orbital) {
+    }
+
+    if (this.state.id && this.state.orbital) {
         this.props.dispatch(loadOrbital(this.state.id, this.state.orbital));
-      }
     }
   }
 
@@ -111,12 +114,15 @@ class CalculationContainer extends Component {
 }
 
 CalculationContainer.propTypes = {
+  cjson: PropTypes.object,
   id: PropTypes.string,
   inchikey: PropTypes.string
 }
 
 CalculationContainer.defaultProps = {
+  cjson: null,
   id: null,
+  orbital: null,
   inchikey: null
 }
 
