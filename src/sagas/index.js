@@ -31,6 +31,7 @@ import { watchNotifications } from './notifications'
 import { watchAuthenticateNersc } from './nersc'
 import { watchLoadNotebooks } from './app'
 import { watchRedirectToJupyterHub } from './jupyterlab'
+import { watchLoadNotebook } from './notebooks'
 import { user, token } from '../rest/girder'
 import * as rest from '../rest'
 import { girderClient  } from '../rest'
@@ -443,5 +444,6 @@ export default function* root() {
   yield fork(watchLoadNotebooks)
   yield fork(watchRedirectToJupyterHub)
   yield fork(watchTestOauthEnabled)
+  yield fork(watchLoadNotebook)
 }
 

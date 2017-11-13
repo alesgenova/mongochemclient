@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 
-import { loadNotebooks } from '../redux/ducks/app'
-import Notebooks from '../components/notebooks'
+import { loadNotebook } from '../redux/ducks/notebooks'
+import Notebook from '../components/notebook'
 import selectors from '../redux/selectors'
 
 class NotebookContainer extends Component {
 
   componentDidMount() {
-    this.props.dispatch(loadNotebook());
+    this.props.dispatch(loadNotebook(this.props.fileId));
   }
 
   render() {
-    return <Notebook html={this.props.html} />;
+    return <Notebook html={this.props.html} />
   }
 }
 
@@ -21,23 +21,20 @@ NotebookContainer.propTypes = {
   html: PropTypes.string,
 }
 
-NotebooksContainer.defaultProps = {
+NotebookContainer.defaultProps = {
   html: null
 }
 
 function mapStateToProps(state, ownProps) {
   let fileId = ownProps.match.params.id || null;
-  let inchikey = ownProps.match.params.inchikey || null;
-  let props = {
-    id,
-    inchikey
-  }
-
-  const html = selectors.app.getNotebookHtml(state);
+  const html = selectors.notebooks.getHtmlById(state, fileId );
 
   return {
-    notebooks
+    fileId,
+    html: {
+      __html: html,
+    }
   };
 }
 
-export default connect(mapStateToProps)(NotebooksContainer)
+export default connect(mapStateToProps)(NotebookContainer)

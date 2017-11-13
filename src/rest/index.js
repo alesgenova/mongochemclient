@@ -3,7 +3,7 @@ import { CANCEL } from 'redux-saga'
 import _ from 'lodash'
 import * as girder from './girder'
 import * as jupyterhub from './jupyterhub'
-
+import * as notebooks from './notebooks'
 
 var _girderClient = axios.create({
   baseURL: `${window.location.origin}/api/v1`
@@ -54,6 +54,7 @@ export function updateToken(token) {
 
 export {
   girder,
-  jupyterhub
+  jupyterhub,
+  notebooks
 }
 
