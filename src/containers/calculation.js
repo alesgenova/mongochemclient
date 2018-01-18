@@ -121,6 +121,22 @@ class CalculationContainer extends Component {
           orbital,
         })
       }
+
+      if (this.props.isoSurfaces) {
+        const iso = this.props.isoSurfaces[0].value;
+        this.setState({
+          isoSurfaces: [{
+            value: iso,
+            color: 'blue',
+            opacity: 0.9,
+          }, {
+            value: -iso,
+            color: 'red',
+            opacity: 0.9
+          }
+          ]
+        });
+      }
     }
   }
 
