@@ -5,9 +5,10 @@ import {List, ListItem} from 'material-ui/List';
 import Slider from 'material-ui/Slider';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-require('font-awesome/css/font-awesome.css');
 import PropTypes from 'prop-types';
 import './menu.css'
+
+require('font-awesome/css/font-awesome.css');
 
 
 export default class MoleculeMenu extends React.Component {

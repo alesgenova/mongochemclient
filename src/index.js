@@ -24,21 +24,18 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import ActionInput from 'material-ui/svg-icons/action/input';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import ReactRedirect from 'react-redirect'
-require('font-awesome/css/font-awesome.css');
+
 import google from './google.svg'
 import nersc from './nerscnim.png'
 import NerscLogin from './components/nersc'
 import LoginMenu from './components/loginmenu'
 import NotebookContainer from './containers/notebook'
 
+require('font-awesome/css/font-awesome.css');
+
 const store = configureStore()
 store.runSaga(rootSaga)
-
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
 
 const style = {
   backgroundColor: '#FAFAFA',
